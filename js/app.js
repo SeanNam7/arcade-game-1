@@ -26,19 +26,19 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 
 // Player class
-// var Player = function() {
-//     this.sprite = 'images/char-boy.png';
-// };
+var Player = function() {
+    this.sprite = 'images/char-boy.png';
+};
 
 // // update() function. Updates Player's position. Parameter: dt, a time delta between ticks
-// Player.prototype.update = function(dt) {
+Player.prototype.update = function(dt) {
 
-// };
+};
 
 // // render() function. Draw the Player on the screen, required method for game
-// Player.prototype.render = function() {
-//     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-// };
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -58,5 +58,5 @@ document.addEventListener('keyup', function(e) {
         40: 'down'
     };
 
-    player.handleInput(allowedKeys[e.keyCode]);
+    // player.handleInput(allowedKeys[e.keyCode]);
 });
