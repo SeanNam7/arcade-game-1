@@ -50,7 +50,7 @@ Player.prototype.render = function() {
 var allEnemies = [new Enemy(-150,50), new Enemy(-150,130), new Enemy(-150,220), new Enemy(-150,300)];
 
 // Place the player object in a variable called player
-var player;
+var player = [new Player(400,600)];
 
 
 // This listens for key presses and sends the keys to your
