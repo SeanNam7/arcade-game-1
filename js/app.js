@@ -1,9 +1,17 @@
+// Got from MND
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
+    this.speed = getRandomInt(150,400);
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -15,8 +23,8 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += Math.random(dt) * (10 - 3) + 3;
-
+    this.x += dt * this.speed;
+    this.reset();
     // when enemies go out of canvas width, then new enemies appear
     // if (this.x = )
     // this.x += 5;
@@ -33,6 +41,13 @@ Enemy.prototype.render = function() {
 //     if (this.x < player.x)
 // }
 
+// Enemy will reset and new Enemy will appear on x = -100 when it hits canvas width
+Enemy.prototype.reset = function() {
+    if (this.x > ctx.canvas.width) {
+        this.x = -100;
+    }
+}
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -46,7 +61,7 @@ var Player = function(x,y) {
 
 // // update() function. Updates Player's position. Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
-    
+    this.playerWin();
 };
 
 // render() function. Draw the Player on the screen, required method for game
@@ -77,17 +92,12 @@ Player.prototype.handleInput = function(allowedKeys) {
 }
 
 // Player reset
-Player.prototype.reset = function(x,y) {
-    this.x = x;
-    this.y = y;
+// @TODO: add timer of 1 second before player goes back to original position
+Player.prototype.playerWin = function() {
+    if (this.y < -45) {
+        this.y = 500;
+    }
 }
-
-// Player reaches water == win game
-// Player.prototype.win = function() {
-//     if (player === ) {
-
-//     }
-// }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
