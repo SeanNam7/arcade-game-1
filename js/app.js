@@ -15,7 +15,8 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += 5;
+    this.x += Math.random(dt) * (10 - 3) + 3;
+    // this.x += 5;
     // console.log("Just checking enemy update");
 };
 
@@ -50,20 +51,20 @@ Player.prototype.handleInput = function(allowedKeys) {
     
     switch(allowedKeys) {
         case "left":
-        this.x += - 100;
-        break
+            this.x += - 100;
+            break
 
         case "up":
-        this.y += - 91;
-        break
+            this.y += - 91;
+            break
 
         case "right":
-        this.x += + 100;
-        break
+            this.x += + 100;
+            break
 
         case "down":
-        this.y += + 91;
-        break
+            this.y += + 91;
+            break
     }
 }
 
