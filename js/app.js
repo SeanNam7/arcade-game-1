@@ -16,6 +16,9 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += Math.random(dt) * (10 - 3) + 3;
+
+    // when enemies go out of canvas width, then new enemies appear
+    // if (this.x = )
     // this.x += 5;
     // console.log("Just checking enemy update");
 };
@@ -24,6 +27,11 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+// Check for Collisions
+// Enemy.prototype.checkCollisions = function(allEnemies,player) {
+//     if (this.x < player.x)
+// }
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -74,11 +82,6 @@ Player.prototype.reset = function(x,y) {
     this.y = y;
 }
 
-// Check for Collisions
-// function checkCollisions(allEnemies,player) {
-
-// }
-
 // Player reaches water == win game
 // Player.prototype.win = function() {
 //     if (player === ) {
@@ -92,11 +95,6 @@ var allEnemies = [new Enemy(-150,50), new Enemy(-150,130), new Enemy(-150,220), 
 
 // Place the player object in a variable called player
 var player = new Player(300,500);
-
-// Define a function called handleInput that takes in a direction and tells the player what to do
-// function(handleInput) {
-
-// }
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
