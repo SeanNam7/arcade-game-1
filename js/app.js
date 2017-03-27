@@ -37,13 +37,53 @@ var Player = function(x,y) {
 
 // // update() function. Updates Player's position. Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
-
+    
 };
 
-// // render() function. Draw the Player on the screen, required method for game
+// render() function. Draw the Player on the screen, required method for game
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+// Make player move
+Player.prototype.handleInput = function(allowedKeys) {
+    
+    switch(allowedKeys) {
+        case "left":
+        this.x += - 100;
+        break
+
+        case "up":
+        this.y += - 91;
+        break
+
+        case "right":
+        this.x += + 100;
+        break
+
+        case "down":
+        this.y += + 91;
+        break
+    }
+}
+
+// Player reset
+Player.prototype.reset = function(x,y) {
+    this.x = x;
+    this.y = y;
+}
+
+// Check for Collisions
+// function checkCollisions(allEnemies,player) {
+
+// }
+
+// Player reaches water == win game
+// Player.prototype.win = function() {
+//     if (player === ) {
+
+//     }
+// }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -52,6 +92,10 @@ var allEnemies = [new Enemy(-150,50), new Enemy(-150,130), new Enemy(-150,220), 
 // Place the player object in a variable called player
 var player = new Player(300,500);
 
+// Define a function called handleInput that takes in a direction and tells the player what to do
+// function(handleInput) {
+
+// }
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -63,5 +107,5 @@ document.addEventListener('keyup', function(e) {
         40: 'down'
     };
 
-    // player.handleInput(allowedKeys[e.keyCode]);
+    player.handleInput(allowedKeys[e.keyCode]);
 });
