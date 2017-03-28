@@ -1,4 +1,4 @@
-// Got from MND
+// Got from MDN Math.random()
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -11,7 +11,7 @@ var Enemy = function(x,y) {
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
-    this.speed = getRandomInt(150,400);
+    this.speed = getRandomInt(150,500);
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -25,21 +25,13 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x += dt * this.speed;
     this.reset();
-    // when enemies go out of canvas width, then new enemies appear
-    // if (this.x = )
-    // this.x += 5;
-    // console.log("Just checking enemy update");
+    // this.checkCollisions();
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-
-// Check for Collisions
-// Enemy.prototype.checkCollisions = function(allEnemies,player) {
-//     if (this.x < player.x)
-// }
 
 // Enemy will reset and new Enemy will appear on x = -100 when it hits canvas width
 Enemy.prototype.reset = function() {
@@ -62,6 +54,7 @@ var Player = function(x,y) {
 // // update() function. Updates Player's position. Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
     this.playerWin();
+    this.checkCollisions();
 };
 
 // render() function. Draw the Player on the screen, required method for game
@@ -91,17 +84,42 @@ Player.prototype.handleInput = function(allowedKeys) {
     }
 }
 
-// Player reset
+// Player wins
 // @TODO: add timer of 1 second before player goes back to original position
 Player.prototype.playerWin = function() {
     if (this.y < -45) {
+        this.x = 300;
         this.y = 500;
+    }
+}
+
+// Player wins
+// Player.prototype.reset = function() {
+//     this.x = 300;
+//     this.y = 500;
+// }
+
+Player.prototype.checkCollisions = function() {
+    var enemyCol = {x: allEnemies.x, y: allEnemies.y, width: 101, height: 171}
+    
+    // for (i = 0; i < player.length; i++) {
+    var playerCol = {x: this.x, y: this.y, width: 101, height: 171}
+// }
+
+    if (enemyCol.x < playerCol.x + playerCol.width &&
+        enemyCol.x + enemyCol.width > playerCol.x &&
+        enemyCol.y < playerCol.y + playerCol.height &&
+        enemyCol.height + enemyCol.y > playerCol.y) {
+        
+        player.x = 300;
+        player.y = 500;
     }
 }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-var allEnemies = [new Enemy(-150,50), new Enemy(-150,130), new Enemy(-150,220), new Enemy(-150,300)];
+var allEnemies = [new Enemy(-150,50), new Enemy(-150,130), new Enemy(-150,220), new Enemy(-150,300),
+                new Enemy(-50,50), new Enemy(0,50), new Enemy(-20,130)];
 
 // Place the player object in a variable called player
 var player = new Player(300,500);
