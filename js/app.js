@@ -94,26 +94,24 @@ Player.prototype.playerWin = function() {
 }
 
 // Player wins
-// Player.prototype.reset = function() {
-//     this.x = 300;
-//     this.y = 500;
-// }
+Player.prototype.reset = function() {
+    this.x = 300;
+    this.y = 500;
+}
 
 Player.prototype.checkCollisions = function() {
-    var enemyCol = {x: allEnemies.x, y: allEnemies.y, width: 101, height: 171}
-    
-    // for (i = 0; i < player.length; i++) {
-    var playerCol = {x: this.x, y: this.y, width: 101, height: 171}
-// }
+    // var player = {x: this.x, y: this.y, width: 101, height: 171}
+    // var allEnemies = {x: 20, y: 10, width: 101, height: 171}
 
-    if (enemyCol.x < playerCol.x + playerCol.width &&
-        enemyCol.x + enemyCol.width > playerCol.x &&
-        enemyCol.y < playerCol.y + playerCol.height &&
-        enemyCol.height + enemyCol.y > playerCol.y) {
-        
-        player.x = 300;
-        player.y = 500;
+    for (i = 0; i <= 7; i++) {
+    if (allEnemies[i] < this.x + 171 &&
+        allEnemies[i] + 101 > this.x &&
+        allEnemiesp[i].y < this.y + 171 &&
+        101 + allEnemies[i].y > this.y) {
+        console.log("collision")
+        player.reset();
     }
+}
 }
 
 // Now instantiate your objects.
