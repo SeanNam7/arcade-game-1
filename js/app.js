@@ -53,8 +53,8 @@ var Player = function(x,y) {
 
 // // update() function. Updates Player's position. Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
-    this.playerWin();
     this.checkCollisions();
+    this.playerWin();
 };
 
 // render() function. Draw the Player on the screen, required method for game
@@ -100,15 +100,15 @@ Player.prototype.reset = function() {
 }
 
 Player.prototype.checkCollisions = function() {
-    // var player = {x: this.x, y: this.y, width: 101, height: 171}
-    // var allEnemies = {x: 20, y: 10, width: 101, height: 171}
+    var playerSize = {w: 20, h: 30}
+    var allEnemiesSize = {w: 40, h: 20}
 
-    for (i = 0; i <= 7; i++) {
-    if (allEnemies[i] < this.x + 171 &&
-        allEnemies[i] + 101 > this.x &&
-        allEnemiesp[i].y < this.y + 171 &&
-        101 + allEnemies[i].y > this.y) {
-        console.log("collision")
+    for (i = 0; i < allEnemies.length; i++) {
+    if (allEnemies[i].x < player.x + playerSize.w &&
+        allEnemies[i].x + allEnemiesSize.w > player.x &&
+        allEnemies[i].y < player.y + playerSize.h &&
+        allEnemiesSize.h + allEnemies[i].y > player.y) {
+        console.log("player collision");
         player.reset();
     }
 }
