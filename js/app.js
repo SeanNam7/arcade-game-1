@@ -55,6 +55,7 @@ var Player = function(x,y) {
 Player.prototype.update = function(dt) {
     this.checkCollisions();
     this.playerWin();
+    this.boundaries();
 };
 
 // render() function. Draw the Player on the screen, required method for game
@@ -119,12 +120,14 @@ Player.prototype.checkCollisions = function() {
 
 // Canvas boundaries so player does not go out of canvas
 Player.prototype.boundaries = function() {
-    if (this.x < 400) {
-        console.log("hitting 707")
-        this.x = 500;
-    } else if (this.x >= 10) {
+    if (this.y >= 410) {
         this.x = 10;
+        this.y = 10;
+        console.log("hitting 707")
     }
+     // else if (this.x >= -10) {
+    //     this.x = -10;
+    // }
 }
 
 // Now instantiate your objects.
