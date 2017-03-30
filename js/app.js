@@ -83,7 +83,10 @@ Player.prototype.handleInput = function(allowedKeys) {
 // @TODO: add timer of 1 second before player goes back to original position
 Player.prototype.playerWin = function() {
     if (this.y < -45) {
-        alert("You've won!");
+        // alert("You've won!");
+        ctx.font = '40pt Arial';
+        ctx.fillStyle = 'white';
+        ctx.fillText = ('WIN MESSAGE', 10, 400);
         this.x = 300;
         this.y = 500;
     }

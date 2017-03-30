@@ -2,3 +2,33 @@ body {
     text-align: center;
     background-color: #222;
 }
+
+#intro {
+	background-color: #222;
+	color: #fff;
+}
+
+.buttons {
+	padding: 25px 0px;
+}
+
+.play {
+	color: #fff !important;
+}
+
+.click-me {
+	margin: 0px 10px;
+}
+
+#myModal {
+	color: #000;
+}
+
+/* #instruction > h4 {
+	text-align: left;
+	padding-left: 60px;
+} */
+
+.intro-text {
+	margin-top: 20px;
+}
