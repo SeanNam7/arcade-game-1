@@ -120,14 +120,16 @@ Player.prototype.checkCollisions = function() {
 
 // Canvas boundaries so player does not go out of canvas
 Player.prototype.boundaries = function() {
-    if (this.y >= 410) {
-        this.x = 10;
-        this.y = 10;
+    if (this.x < 0) {
+        this.x = 0;
         console.log("hitting 707")
+    } else if (this.x > 600) {
+        this.x = 600;
+    } else if (this.y < 0) {
+        this.y = 0;
+    } else if (this.y > 500) {
+        this.y = 500;
     }
-     // else if (this.x >= -10) {
-    //     this.x = -10;
-    // }
 }
 
 // Now instantiate your objects.
