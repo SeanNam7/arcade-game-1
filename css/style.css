@@ -14,6 +14,7 @@ body {
 
 .play {
 	color: #fff !important;
+	text-decoration: none !important;
 }
 
 .click-me {
@@ -24,11 +25,18 @@ body {
 	color: #000;
 }
 
-/* #instruction > h4 {
-	text-align: left;
-	padding-left: 60px;
-} */
-
 .intro-text {
-	margin-top: 20px;
+	margin-top: 30px;
+}
+
+.modal-footer {
+	text-align: center;
+}
+
+#footer {
+	font-size: 14px;
+	font-family: "Helvetica", sans-serif;
+	font-weight: 400;
+	letter-spacing: 0.5px;
+	padding: 15px 0px;
 }
