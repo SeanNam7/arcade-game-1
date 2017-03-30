@@ -88,17 +88,19 @@ Player.prototype.handleInput = function(allowedKeys) {
 // @TODO: add timer of 1 second before player goes back to original position
 Player.prototype.playerWin = function() {
     if (this.y < -45) {
+        alert("You've won!");
         this.x = 300;
         this.y = 500;
     }
 }
 
-// Player wins
+// Player wins and reset
 Player.prototype.reset = function() {
     this.x = 300;
     this.y = 500;
 }
 
+// checks for collision between player and enemies
 Player.prototype.checkCollisions = function() {
     var playerSize = {w: 20, h: 30}
     var allEnemiesSize = {w: 40, h: 20}
@@ -109,9 +111,20 @@ Player.prototype.checkCollisions = function() {
         allEnemies[i].y < player.y + playerSize.h &&
         allEnemiesSize.h + allEnemies[i].y > player.y) {
         console.log("player collision");
+        alert("You've lost!");
         player.reset();
     }
 }
+}
+
+// Canvas boundaries so player does not go out of canvas
+Player.prototype.boundaries = function() {
+    if (this.x < 400) {
+        console.log("hitting 707")
+        this.x = 500;
+    } else if (this.x >= 10) {
+        this.x = 10;
+    }
 }
 
 // Now instantiate your objects.
