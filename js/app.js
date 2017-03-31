@@ -5,7 +5,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-// Adding scores and lives to game
+// Creating variables with %data% inside objects to add scores and lives to game
 var score = "SCORE: %data%";
 var lives = "LIVES: %data%";
 
@@ -14,6 +14,7 @@ var Enemy = function(x,y) {
     // Variables applied to each of the game's instances go here,
     this.x = x;
     this.y = y;
+    // random speed from 150 to 500
     this.speed = getRandomInt(150,500);
     // The image/sprite for our enemies, this uses a helper to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -46,33 +47,42 @@ var Player = function(x,y) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-boy.png';
+    // creating scores that start at 0 and lives start at 3
     this.score = 0;
     this.lives = 3;
 };
 
 // // update() function. Updates Player's position. Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
+    // variables replace %data%, using .replace method, inside the variables score and lives so they get invoked when player wins or collides
     var updateScore = score.replace("%data%", this.score);
     var updateLives = lives.replace("%data%", this.lives);
 
+    // targetting #data id in index.html file so score and lives get updated based on winning or collision
     $("#data").html(" ");
     $("#data").html(updateScore + " " + updateLives);
 
+    // conditions for when player wins = score increases 100 using if/else statements and invoking playerWin() function
     if (this.playerWin()) {
         this.score += 100;
         setTimeout(player.reset(), 5000 * dt);
-    } else if (this.checkCollisions()) {
+    } 
+
+    // conditions for when player collides = life decreases by 1 using if/else statements and invoking checkCollision() function
+    else if (this.checkCollisions()) { 
         this.lives -= 1;
         console.log("less life!");
         setTimeout(player.reset(), 1000 * dt);
     }
 
+    // If lives get to 0, reset to 3. Added a fun alert message :)
     if (this.lives <= 0) {
         alert("Ooops! You are out of life. Let me recharge you so you keep playing :)");
         this.lives = 3;
         this.score = 0;
     }
-
+    
+    // invoking checkCollisions(), playerWin(), and boundaries() function through Object-Oriented JS
     this.checkCollisions();
     this.playerWin();
     this.boundaries();
@@ -117,6 +127,8 @@ Player.prototype.playerWin = function() {
         ctx.fillText = ('WIN MESSAGE', 10, 400);
         this.x = 300;
         this.y = 500;
+
+        // Return true boolean for when conditions meet at Player.update function = when player wins or collides
         return true;
     }
 }
