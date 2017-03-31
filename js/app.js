@@ -47,7 +47,7 @@ var Player = function(x,y) {
     this.y = y;
     this.sprite = 'images/char-boy.png';
     this.score = 0;
-    this.lives = 5;
+    this.lives = 3;
 };
 
 // // update() function. Updates Player's position. Parameter: dt, a time delta between ticks
@@ -58,18 +58,18 @@ Player.prototype.update = function(dt) {
     $("#data").html(" ");
     $("#data").html(updateScore + " " + updateLives);
 
-    if (this.playerWin === true) {
+    if (this.playerWin()) {
         this.score += 100;
-        console.log("scoreee!");
-        setTimeout(player.reset(), 1000 * dt);
-    } else if (this.checkCollisions === true) {
+        setTimeout(player.reset(), 5000 * dt);
+    } else if (this.checkCollisions()) {
         this.lives -= 1;
         console.log("less life!");
         setTimeout(player.reset(), 1000 * dt);
     }
 
     if (this.lives <= 0) {
-        this.lives = 5;
+        alert("Ooops! You are out of life. Let me recharge you so you keep playing :)");
+        this.lives = 3;
         this.score = 0;
     }
 
@@ -117,6 +117,7 @@ Player.prototype.playerWin = function() {
         ctx.fillText = ('WIN MESSAGE', 10, 400);
         this.x = 300;
         this.y = 500;
+        return true;
     }
 }
 
@@ -139,6 +140,7 @@ Player.prototype.checkCollisions = function() {
         console.log("Ooops! There was a collision. Start again :)");
         // alert("You've lost!");
         player.reset();
+        return true;
     }
 }
 }
