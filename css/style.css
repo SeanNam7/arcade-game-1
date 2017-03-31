@@ -40,3 +40,17 @@ body {
 	letter-spacing: 0.5px;
 	padding: 15px 0px;
 }
+
+#data {
+	color: #fff;
+	margin-top: 50px;
+	font-family: "Helvetica", sans-serif;
+}
+
+#score {
+	margin-right: 50px;
+}
+
+#lives {
+	margin-left: 50px;	
+}

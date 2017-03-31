@@ -5,6 +5,10 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+// Adding scores and lives to game
+var score = "SCORE: %data%";
+var lives = "LIVES: %data%";
+
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // Variables applied to each of the game's instances go here,
@@ -42,10 +46,33 @@ var Player = function(x,y) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-boy.png';
+    this.score = 0;
+    this.lives = 5;
 };
 
 // // update() function. Updates Player's position. Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
+    var updateScore = score.replace("%data%", this.score);
+    var updateLives = lives.replace("%data%", this.lives);
+
+    $("#data").html(" ");
+    $("#data").html(updateScore + " " + updateLives);
+
+    if (this.playerWin === true) {
+        this.score += 100;
+        console.log("scoreee!");
+        setTimeout(player.reset(), 1000 * dt);
+    } else if (this.checkCollisions === true) {
+        this.lives -= 1;
+        console.log("less life!");
+        setTimeout(player.reset(), 1000 * dt);
+    }
+
+    if (this.lives <= 0) {
+        this.lives = 5;
+        this.score = 0;
+    }
+
     this.checkCollisions();
     this.playerWin();
     this.boundaries();
@@ -83,6 +110,7 @@ Player.prototype.handleInput = function(allowedKeys) {
 // @TODO: add timer of 1 second before player goes back to original position
 Player.prototype.playerWin = function() {
     if (this.y < -45) {
+        console.log("Yay! You've won. Keep going!")
         // alert("You've won!");
         ctx.font = '40pt Arial';
         ctx.fillStyle = 'white';
@@ -108,8 +136,8 @@ Player.prototype.checkCollisions = function() {
         allEnemies[i].x + allEnemiesSize.w > player.x &&
         allEnemies[i].y < player.y + playerSize.h &&
         allEnemiesSize.h + allEnemies[i].y > player.y) {
-        console.log("player collision");
-        alert("You've lost!");
+        console.log("Ooops! There was a collision. Start again :)");
+        // alert("You've lost!");
         player.reset();
     }
 }
