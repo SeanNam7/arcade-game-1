@@ -3,6 +3,16 @@ body {
     background-color: #222;
 }
 
+#twitter {
+	color: #fff;
+	margin-right: 15px;
+}
+
+#facebook {
+	color: #fff;
+	margin-left: 15px;
+}
+
 #intro {
 	background-color: #222;
 	color: #fff;
@@ -43,13 +53,12 @@ body {
 
 #data {
 	color: #fff;
-	
 	font-family: "Helvetica", sans-serif;
 }
 
 #created {
 	color: #fff;
-	margin: 50px 0px 0px 0px;
+	margin: 10px 0px 0px 0px;
 	font-family: "Futura", "Helvetica", sans-serif;
 }
 /* 

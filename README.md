@@ -4,7 +4,9 @@
 ## Instructions to download game
 ##### 1) Download file as zip file
 ##### 2) Unzip file on your computer
-##### 3) Open **index.html** on your browser
+##### 3) Open **intro.html** on your browser
+##### 4) Click on instructions
+##### 5) Read instructions and start playing
 
 ## Instructions to play game
 * Your goal is to avoid colliding into bugs, so you can reach the water section and win. 

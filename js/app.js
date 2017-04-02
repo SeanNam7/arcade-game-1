@@ -1,11 +1,3 @@
-// Got from MDN Math.random()
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
-
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // Variables applied to each of the game's instances go here,
@@ -76,12 +68,12 @@ Player.prototype.update = function(dt) {
     // conditions for when player collides = life decreases by 1 using if/else statements and invoking checkCollision() function
     else if (this.checkCollisions()) { 
         this.lives -= 1;
-        setTimeout(player.reset(), 1000 * dt);
+        setTimeout(player.reset(), 5000 * dt);
     }
 
     // If lives get to 0, reset to 3. Added a fun alert message :)
     if (this.lives <= 0) {
-        alert("Ops! Your life is 0. Let me recharge it so you keep playing :)");
+        alert("Game over! Click OK to get more life :)");
         this.lives = 3;
         this.score = 0;
         this.level = 1;
