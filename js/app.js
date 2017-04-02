@@ -5,9 +5,6 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-// Creating variables with %data% inside objects to add scores and lives to game
-var score = "SCORE: %data%";
-var lives = "LIVES: %data%";
 
 // Enemies our player must avoid
 var Enemy = function(x,y) {
@@ -15,7 +12,7 @@ var Enemy = function(x,y) {
     this.x = x;
     this.y = y;
     // random speed from 150 to 500
-    this.speed = getRandomInt(150,500);
+    this.speed = Math.floor(Math.random() * (500 - 150) + 150);
     // The image/sprite for our enemies, this uses a helper to easily load images
     this.sprite = 'images/enemy-bug.png';
 };
@@ -40,7 +37,7 @@ Enemy.prototype.reset = function() {
     if (this.x > ctx.canvas.width) {
         this.x = -100;
     }
-}
+};
 
 // Player class
 var Player = function(x,y) {
@@ -50,36 +47,44 @@ var Player = function(x,y) {
     // creating scores that start at 0 and lives start at 3
     this.score = 0;
     this.lives = 3;
+    this.level = 1;
 };
 
 // // update() function. Updates Player's position. Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
+    // Creating variables with %data% inside objects to add scores and lives to game
+    var SCORE = "SCORE: %data%";
+    var LIVES = "LIVES: %data%";
+    var LEVEL = "LEVEL: %data%";
+
     // variables replace %data%, using .replace method, inside the variables score and lives so they get invoked when player wins or collides
-    var updateScore = score.replace("%data%", this.score);
-    var updateLives = lives.replace("%data%", this.lives);
+    var updateScore = SCORE.replace("%data%", this.score);
+    var updateLives = LIVES.replace("%data%", this.lives);
+    var updateLevel = LEVEL.replace("%data%", this.level);
 
     // targetting #data id in index.html file so score and lives get updated based on winning or collision
     $("#data").html(" ");
-    $("#data").html(updateScore + " " + updateLives);
+    $("#data").html(updateScore + " " + updateLives + " " + updateLevel);
 
     // conditions for when player wins = score increases 100 using if/else statements and invoking playerWin() function
     if (this.playerWin()) {
         this.score += 100;
+        this.level += 1;
         setTimeout(player.reset(), 5000 * dt);
     } 
 
     // conditions for when player collides = life decreases by 1 using if/else statements and invoking checkCollision() function
     else if (this.checkCollisions()) { 
         this.lives -= 1;
-        console.log("less life!");
         setTimeout(player.reset(), 1000 * dt);
     }
 
     // If lives get to 0, reset to 3. Added a fun alert message :)
     if (this.lives <= 0) {
-        alert("Ooops! You are out of life. Let me recharge you so you keep playing :)");
+        alert("Ops! Your life is 0. Let me recharge it so you keep playing :)");
         this.lives = 3;
         this.score = 0;
+        this.level = 1;
     }
     
     // invoking checkCollisions(), playerWin(), and boundaries() function through Object-Oriented JS
@@ -114,7 +119,7 @@ Player.prototype.handleInput = function(allowedKeys) {
             this.y += + 91;
             break
     }
-}
+};
 
 // Player wins then creates an alert in browser and resets player to original position
 // @TODO: add timer of 1 second before player goes back to original position
@@ -131,13 +136,13 @@ Player.prototype.playerWin = function() {
         // Return true boolean for when conditions meet at Player.update function = when player wins or collides
         return true;
     }
-}
+};
 
 // Player wins and reset - this is invoked in checkCollisions()
 Player.prototype.reset = function() {
     this.x = 300;
     this.y = 500;
-}
+};
 
 // Checks for collision between player and enemies - invoked in Player.update
 Player.prototype.checkCollisions = function() {
@@ -155,7 +160,7 @@ Player.prototype.checkCollisions = function() {
         return true;
     }
 }
-}
+};
 
 // Canvas boundaries so player does not go out of canvas
 Player.prototype.boundaries = function() {
@@ -168,11 +173,16 @@ Player.prototype.boundaries = function() {
     } else if (this.y > 500) {
         this.y = 500;
     }
-}
+};
 
 // Place all enemy objects in canvas
-var allEnemies = [new Enemy(-150,50), new Enemy(-150,130), new Enemy(-150,220), new Enemy(-150,300),
-                new Enemy(-50,50), new Enemy(0,50), new Enemy(-20,130)];
+var allEnemies = [new Enemy(-150,50),
+                new Enemy(-150,130),
+                new Enemy(-150,220),
+                new Enemy(-150,300),
+                new Enemy(-50,50),
+                new Enemy(0,50),
+                new Enemy(-20,130)];
 
 // Place the player object in canvas
 var player = new Player(300,500);
