@@ -1,10 +1,45 @@
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+var game = {
+    level: 0,
+    enemies: [5,9,11,15,20,23,28,35,42,50,60],
+    lanes: [50, 120, 220, 300],
+    getEnemies: function() {
+        return this.enemies[this.level]; //
+    },
+    getSpeed: function() {
+        var min = 200 + this.level * 50;
+        var max = 500 + this.level * 50;
+        return getRandomInt(min, max);
+    },
+    getStartY: function() {
+        var laneNumber = getRandomInt(0, this.lanes.length);
+        return this.lanes[laneNumber];
+    },
+    nextLevel: function() {
+        this.level++;
+    },
+    resetEnemies: function(allEnemies) {
+        var that = this
+        allEnemies.forEach(function(enemy){
+            enemy.x = -150;
+            enemy.y = that.getStartY();
+            enemy.speed = that.getSpeed();
+        });
+    }
+};
+
 // Enemies our player must avoid
-var Enemy = function(x,y) {
+var Enemy = function(x,y, speed) {
     // Variables applied to each of the game's instances go here,
     this.x = x;
     this.y = y;
     // random speed from 150 to 500
-    this.speed = Math.floor(Math.random() * (500 - 150) + 150);
+    this.speed = speed;
     // The image/sprite for our enemies, this uses a helper to easily load images
     this.sprite = 'images/enemy-bug.png';
 };
@@ -168,13 +203,11 @@ Player.prototype.boundaries = function() {
 };
 
 // Place all enemy objects in canvas
-var allEnemies = [new Enemy(-150,50),
-                new Enemy(-150,130),
-                new Enemy(-150,220),
-                new Enemy(-150,300),
-                new Enemy(-50,50),
-                new Enemy(0,50),
-                new Enemy(-20,130)];
+var allEnemies = [];
+
+for (var i = 0; i < 60; i++) {
+    allEnemies.push(new Enemy(-150, game.getStartY(), game.getSpeed()));
+}
 
 // Place the player object in canvas
 var player = new Player(300,500);

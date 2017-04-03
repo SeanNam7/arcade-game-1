@@ -90,9 +90,13 @@ var Engine = (function(global) {
      * the data/properties related to the object. Do your drawing in your
      * render methods.
      */
+
+     // edit i parameter = index to control number of enemies to move in the screen
     function updateEntities(dt) {
-        allEnemies.forEach(function(enemy) {
-            enemy.update(dt);
+        allEnemies.forEach(function(enemy, i) {
+            if (i <= game.getEnemies()) { // get number of enemies on screen
+                enemy.update(dt);
+            }
         });
         player.update();
     }
