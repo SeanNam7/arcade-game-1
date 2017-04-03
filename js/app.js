@@ -6,7 +6,7 @@ function getRandomInt(min, max) {
 
 var game = {
     level: 0,
-    enemies: [5,9,11,15,20,23,28,35,42,50,60],
+    enemies: [3,5,7,9,12,14,16,18,20,22,30],
     lanes: [50, 120, 220, 300],
     getEnemies: function() {
         return this.enemies[this.level]; //
@@ -97,6 +97,7 @@ Player.prototype.update = function(dt) {
     if (this.playerWin()) {
         this.score += 100;
         this.level += 1;
+        // this.game.nextLevel();
         setTimeout(player.reset(), 5000 * dt);
     } 
 
@@ -154,12 +155,12 @@ Player.prototype.playerWin = function() {
     if (this.y < -45) {
         console.log("Yay! You've won. Keep going!")
         // alert("You've won!");
-        ctx.font = '40pt Arial';
-        ctx.fillStyle = 'white';
-        ctx.fillText = ('WIN MESSAGE', 10, 400);
+        // ctx.font = '40pt Arial';
+        // ctx.fillStyle = 'white';
+        // ctx.fillText = ('WIN MESSAGE', 10, 400);
         this.x = 300;
         this.y = 500;
-
+        game.nextLevel();
         // Return true boolean for when conditions meet at Player.update function = when player wins or collides
         return true;
     }
@@ -205,7 +206,7 @@ Player.prototype.boundaries = function() {
 // Place all enemy objects in canvas
 var allEnemies = [];
 
-for (var i = 0; i < 60; i++) {
+for (var i = 0; i < 30; i++) {
     allEnemies.push(new Enemy(-150, game.getStartY(), game.getSpeed()));
 }
 

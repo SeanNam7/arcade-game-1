@@ -94,7 +94,7 @@ var Engine = (function(global) {
      // edit i parameter = index to control number of enemies to move in the screen
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy, i) {
-            if (i <= game.getEnemies()) { // get number of enemies on screen
+            if (i <= game.getEnemies()) { // as long as i is <= to enemies numbers for the level, game.getEnemies() get enemies of the object game object. Then enemies will aget number of enemies on screen
                 enemy.update(dt);
             }
         });
