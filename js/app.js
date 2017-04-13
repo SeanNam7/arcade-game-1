@@ -6,7 +6,7 @@ function getRandomInt(min, max) {
 
 var game = {
     level: 0,
-    enemies: [3,5,7,9,12,14,16,18,20,22,30],
+    enemies: [2,3,4,5,6,7,9,10,12,13,14],
     lanes: [50, 120, 220, 300],
     getEnemies: function() {
         return this.enemies[this.level]; //
